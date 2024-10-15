@@ -1,0 +1,14 @@
+<h1>Lista de Eventos</h1>
+<ul>
+    {% for evento in eventos %}
+    <li>
+        <h2>{{ evento.nome }}</h2>
+        <p>{{ evento.descricao }}</p>
+        <p>Data e Hora: {{ evento.data_hora }}</p>
+        <p>Endereço: {{ evento.endereco }}</p>
+        <p>Convidados: {{ evento.limite_convidados }}</p>
+        <p>Visibilidade: {{ evento.visibilidade }}</p>
+        <a href="{% url 'inscrever_evento' evento.id %}">Inscrever-se</a>
+    </li>
+    {% endfor %}
+</ul>

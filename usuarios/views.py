@@ -5,7 +5,7 @@ from .forms import UsuarioForm
 
 # View da home
 def home(request):
-    return render(request, 'home.html')
+    return render(request, 'usuarios/home.html')
 
 # View de cadastro
 def cadastro(request):
