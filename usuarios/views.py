@@ -7,6 +7,7 @@ from .forms import UsuarioForm
 def home(request):
     return render(request, 'usuarios/home.html')
 
+
 # View de cadastro
 def cadastro(request):
     if request.method == 'POST':
@@ -14,10 +15,11 @@ def cadastro(request):
         if form.is_valid():
             usuario = form.save()
             login(request, usuario)  # Loga o usuário automaticamente após o cadastro
-            return redirect('home')  # Redireciona para a página inicial (ajuste conforme necessidade)
+            return redirect('pagina_principal')  # Redireciona para a página principal
     else:
         form = UsuarioForm()
     return render(request, 'usuarios/cadastro.html', {'form': form})
+
 
 # View de login
 def login_view(request):
@@ -29,7 +31,11 @@ def login_view(request):
             usuario = authenticate(username=username, password=password)
             if usuario is not None:
                 login(request, usuario)
-                return redirect('home')
+                return redirect('pagina_principal')
     else:
         form = AuthenticationForm()
     return render(request, 'usuarios/login.html', {'form': form})
+
+
+def pagina_principal(request):
+    return render(request, 'usuarios/pagina_principal.html')
