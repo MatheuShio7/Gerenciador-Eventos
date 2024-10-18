@@ -5,6 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Página Principal</title>
     <style>
+        *{
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
         body {
             font-family: Arial, sans-serif;
             background-color: #f7f7f7;
@@ -22,18 +28,50 @@
             background-color: #fff;
             border-radius: 5px;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            position: relative;
         }
 
-        .section h2 {
-            font-size: 1.5em;
+        .section h1 {
+            display: inline-block;
+            margin-bottom: 20px;
+        }
+
+        .create-event-btn {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: grey;
+            color: black;
+            font-size: 20px;
+            border-radius: 30%;
+            text-decoration: none;
+            opacity: 50%;
+        }
+
+        .create-event-btn:hover {
+            background-color: rgb(167, 167, 167);
+        }
+
+        .create-event-btn i {
+            font-size: 40px;
+        }
+
+        .event-list {
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
     <div class="section">
-        <h1>Meus eventos</h1>
-        <!-- Aqui você poderá listar os eventos criados pelo usuário -->
-        <p>Você ainda não criou nenhum evento.</p>
+        <h1>Meus Eventos</h1>
+        <div class="event-list">
+            <!-- Aqui vai o botão de criação de evento -->
+            <a href="{% url 'criar_evento' %}" class="create-event-btn">
+                <i>+</i>
+            </a>
+        </div>
     </div>
 
     <div class="section">
