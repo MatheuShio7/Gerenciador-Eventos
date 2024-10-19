@@ -1,0 +1,101 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f7f7f7;
+    margin: 0;
+    padding: 20px;
+}
+
+h1, h2 {
+    color: #333;
+}
+
+.section {
+    margin-bottom: 20px;
+    padding: 15px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.section h1 {
+    margin-bottom: 20px;
+}
+
+.meus-eventos,
+.eventos-publicos {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 15px; 
+}
+
+.meus-eventos {
+    height: 160px;
+}
+
+.eventos-publicos {
+    height: 180px;
+}
+
+.meus-eventos .event-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.eventos-publicos .event-card {
+    border: 1px solid #ccc;
+    border-radius: 10px;
+    padding: 15px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    width: 250px;
+}
+
+.event-card-link {
+    text-decoration: none;
+    color: black;
+}
+
+.event-card h3 {
+    margin-bottom: 7px;
+}
+
+.event-card p {
+    margin-bottom: 5px;
+}
+
+.create-event-btn {
+    align-self: center;
+    display: block;
+    color: #333;
+    margin-inline: 20px;
+    transition: 0.3s;
+}
+
+.create-event-btn:hover {
+    color: #4b4b4b;
+    transform: scale(1.05);
+}
+
+.create-event-btn i {
+    font-size: 40px;
+}
+
+/* Limitar a descrição em até 2 linhas */
+.event-card p.descricao {
+    display: -webkit-box;
+    -webkit-line-clamp: 2; 
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+}

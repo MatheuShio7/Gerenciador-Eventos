@@ -1,6 +1,138 @@
-<h1>Criar Novo Evento</h1>
-<form method="post">
-    {% csrf_token %}
-    {{ form.as_p }}
-    <button type="submit">Criar Evento</button>
-</form>
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Criar Novo Evento</title>
+    <style>
+        h1 {
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .label-nome-evento, 
+        .label-data-hora-evento,
+        .label-endereco-evento,
+        .label-descricao-evento,
+        .label-limite-convidados-evento,
+        .label-visibilidade-evento {
+            font-size: 18px;
+            font-family: Arial, Helvetica, sans-serif;
+        }
+
+        .form-nome {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-data-hora {
+            width: 25%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-endereco {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-descricao {
+            width: 70%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-limite-convidados {
+            width: 10%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .form-visibilidade {
+            width: 25%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            font-size: 14px;
+            background-color: #f9f9f9;
+        }
+
+        .btn-container {
+            text-align: center;
+        }
+
+        button {
+            font-size: 18px;
+            padding: 10px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Criar Novo Evento</h1>
+    <form method="post">
+        {% csrf_token %}
+        
+        <!-- Nome do Evento -->
+        <div class="form-group">
+            <label for="{{ form.nome.id_for_label }}" class="label-nome-evento">Nome do Evento:</label>
+            {{ form.nome }}
+        </div>
+
+        <!-- Data e Hora -->
+        <div class="form-group">
+            <label for="{{ form.data_hora.id_for_label }}" class="label-data-hora-evento">Data e Hora:</label>
+            {{ form.data_hora }}
+        </div>
+
+        <!-- Endereço -->
+        <div class="form-group">
+            <label for="{{ form.endereco.id_for_label }}" class="label-endereco-evento">Endereço:</label>
+            {{ form.endereco }}
+        </div>
+
+        <!-- Descrição -->
+        <div class="form-group">
+            <label for="{{ form.descricao.id_for_label }}" class="label-descricao-evento">Descrição:</label>
+            {{ form.descricao }}
+        </div>
+
+        <!-- Limite de Convidados -->
+        <div class="form-group">
+            <label for="{{ form.limite_convidados.id_for_label }}" class="label-limite-convidados-evento">Limite de Convidados:</label>
+            {{ form.limite_convidados }}
+        </div>
+
+        <!-- Visibilidade -->
+        <div class="form-group">
+            <label for="{{ form.visibilidade.id_for_label }}" class="label-visibilidade-evento">Visibilidade:</label>
+            {{ form.visibilidade }}
+        </div>
+
+        <div class="btn-container">
+            <button type="submit">Criar Evento</button>
+        </div>
+    </form>
+</body>
+</html>

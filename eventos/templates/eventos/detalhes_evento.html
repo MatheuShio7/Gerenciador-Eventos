@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Evento</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1, h2 {
+            color: #333;
+        }
+
+        .event-details {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .event-details p {
+            margin-bottom: 10px;
+        }
+
+        .btn-inscrever {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+        }
+    </style>
+</head>
+<body>
+
+    <div class="event-details">
+        <h1>{{ evento.nome }}</h1>
+        <p><strong>Criador:</strong> {{ evento.criador.username }}</p>
+        <p><strong>Data e Hora:</strong> {{ evento.data_hora }}</p>
+        <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
+        <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
+        <p><strong>Limite de Convidados:</strong> {{ evento.limite_convidados }}</p>
+
+        {% if evento.criador == request.user %}
+            <a href="{% url 'editar_evento' evento.id %}">Editar Evento</a>
+        {% else %}
+            <form method="post" action="{% url 'inscrever_evento' evento.id %}">
+                {% csrf_token %}
+                <button type="submit">Inscrever-se</button>
+            </form>
+        {% endif %}
+    </div>
+
+</body>
+</html>
