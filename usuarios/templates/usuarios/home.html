@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Eventos</title>
     <style>
-        /* Exemplo de estilo básico */
         body {
             font-family: Arial, sans-serif;
             margin: 0;
@@ -31,6 +30,11 @@
             color: #666;
             font-size: 1.1em;
         }
+        
+        .btns {
+            display: flex;
+        }
+
         a {
             display: inline-block;
             margin-top: 15px;
@@ -49,9 +53,11 @@
 <body>
     <div class="container">
         <h1>Bem-vindo ao Gerenciador de Eventos!</h1>
-        <p>Cadastre-se, faça login e comece a criar e participar de eventos.</p>
-        <a href="{% url 'login' %}">Entrar</a>
-        <a href="{% url 'cadastro' %}">Cadastre-se</a>
+        <p>Cadastre-se ou faça login e comece a criar e participar de eventos.</p>
+        <div class="btns">
+            <a href="{% url 'login' %}">Entrar</a>
+            <a href="{% url 'cadastro' %}">Cadastre-se</a>
+        </div>
     </div>
 </body>
 </html>
