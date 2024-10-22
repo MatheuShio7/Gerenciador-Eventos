@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="pt-br">
 <head>
+    {% load static %}
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciador de Eventos</title>
@@ -13,15 +14,19 @@
             align-items: center;
             justify-content: center;
             min-height: 100vh;
-            background-color: #f3f3f3;
+            background-color: #d4d4d4;
         }
         .container {
             text-align: center;
             padding: 20px;
             background-color: #ffffff;
             border-radius: 10px;
-            box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+            box-shadow: 4px 4px 8px rgba(0, 0, 0, 0.1);
             max-width: 600px;
+        }
+        img {
+            width: 300px;
+            height: 300px;
         }
         h1 {
             color: #333;
@@ -33,6 +38,8 @@
         
         .btns {
             display: flex;
+            justify-content: center;
+            gap: 20px;
         }
 
         a {
@@ -40,23 +47,27 @@
             margin-top: 15px;
             padding: 10px 20px;
             text-decoration: none;
-            background-color: #4CAF50;
-            color: white;
-            border-radius: 5px;
-            transition: background-color 0.3s;
+            font-size: 1.1em;
+            font-weight: 550;
+            color: #5E17EB;
+            border: 2px solid #5E17EB;
+            border-radius: 10px;
+            transition: 0.3s;
         }
         a:hover {
-            background-color: #45a049;
+            background-color: #5E17EB;
+            color: white;
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
         <h1>Bem-vindo ao Gerenciador de Eventos!</h1>
         <p>Cadastre-se ou faça login e comece a criar e participar de eventos.</p>
         <div class="btns">
             <a href="{% url 'login' %}">Entrar</a>
-            <a href="{% url 'cadastro' %}">Cadastre-se</a>
+            <a href="{% url 'cadastro' %}">Cadastrar</a>
         </div>
     </div>
 </body>

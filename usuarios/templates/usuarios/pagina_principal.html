@@ -13,6 +13,9 @@
     <div class="section">
         <h1>Meus Eventos</h1>
         <div class="meus-eventos">
+            <a href="{% url 'criar_evento' %}" class="create-event-btn">
+                <i class="bi bi-plus-circle-fill"></i>
+            </a>
             {% for evento in eventos_usuario %}
                 <a href="{% url 'detalhes_evento' evento.id %}" class="event-card-link">
                     <div class="event-card">
@@ -23,9 +26,6 @@
                     </div>
                 </a>
             {% endfor %}
-            <a href="{% url 'criar_evento' %}" class="create-event-btn">
-                <i class="bi bi-plus-circle-fill"></i>
-            </a>
         </div>
     </div>
 

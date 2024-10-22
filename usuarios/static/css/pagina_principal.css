@@ -63,6 +63,11 @@ h1, h2 {
 .event-card-link {
     text-decoration: none;
     color: black;
+    transition: 0.3s;
+}
+
+.event-card-link:hover {
+    transform: scale(1.02);
 }
 
 .event-card h3 {
@@ -75,9 +80,14 @@ h1, h2 {
 
 .create-event-btn {
     align-self: center;
-    display: block;
+    justify-self: center;
+    height: 100%;
+    display: flex;
+    align-items: center;
     color: #333;
-    margin-inline: 20px;
+    padding-inline: 40px;
+    border: 1px solid #ccc;
+    border-radius: 10px;
     transition: 0.3s;
 }
 
@@ -90,7 +100,6 @@ h1, h2 {
     font-size: 40px;
 }
 
-/* Limitar a descrição em até 2 linhas */
 .event-card p.descricao {
     display: -webkit-box;
     -webkit-line-clamp: 2; 

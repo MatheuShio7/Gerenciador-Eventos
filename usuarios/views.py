@@ -37,10 +37,17 @@ def login_view(request):
 
 
 def pagina_principal(request):
-    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(criador=request.user)
-    eventos_usuario = Evento.objects.filter(criador=request.user)
+    usuario = request.user
+
+    # Seleciona os eventos criados ou em que o usuário está inscrito
+    eventos_usuario = Evento.objects.filter(convidados=usuario) | Evento.objects.filter(criador=usuario)
     
-    return render(request, 'usuarios/pagina_principal.html', {
-        'eventos_publicos': eventos_publicos,
-        'eventos_usuario': eventos_usuario
-    })
+    # Seleciona os eventos públicos em que o usuário não está inscrito
+    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(convidados=usuario)
+
+    context = {
+        'eventos_usuario': eventos_usuario.distinct(),
+        'eventos_publicos': eventos_publicos
+    }
+    
+    return render(request, 'usuarios/pagina_principal.html', context)

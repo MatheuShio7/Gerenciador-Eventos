@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventoForm
 from .models import Evento
+from django.contrib.auth.decorators import login_required
 
 
 def criar_evento(request):
@@ -28,8 +29,29 @@ def editar_evento(request, evento_id):
         form = EventoForm(request.POST, instance=evento)
         if form.is_valid():
             form.save()
-            return redirect('detalhes_evento', evento_id=evento.id)  # Redireciona para a página de detalhes
+            return redirect('detalhes_evento', evento_id=evento.id)  
     else:
         form = EventoForm(instance=evento)
 
     return render(request, 'eventos/editar_evento.html', {'form': form, 'evento': evento})
+
+
+@login_required
+def inscrever_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+
+    if request.user not in evento.convidados.all():
+        evento.convidados.add(request.user)
+        evento.save()
+
+    return redirect('pagina_principal')    
+
+
+@login_required
+def desinscrever_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+
+    if request.user in evento.convidados.all():
+        evento.convidados.remove(request.user)  # Remove o usuário da lista de convidados
+
+    return redirect('pagina_principal')

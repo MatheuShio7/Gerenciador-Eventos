@@ -29,13 +29,17 @@
             margin-bottom: 10px;
         }
 
-        .btn-inscrever {
+        .btn-inscrever, .btn-voltar, .btn-editar {
             display: inline-block;
             padding: 10px 20px;
             background-color: #28a745;
             color: white;
             text-decoration: none;
             border-radius: 5px;
+        }
+
+        .btn-voltar {
+            background-color: #007bff; 
         }
     </style>
 </head>
@@ -50,14 +54,22 @@
         <p><strong>Limite de Convidados:</strong> {{ evento.limite_convidados }}</p>
 
         {% if evento.criador == request.user %}
-            <a href="{% url 'editar_evento' evento.id %}">Editar Evento</a>
+        <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>
+        <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">Editar Evento</a>
+        {% elif request.user in evento.convidados.all %}
+            <form method="post" action="{% url 'desinscrever_evento' evento.id %}">
+                {% csrf_token %}
+                <button type="submit">Desinscrever-se</button>
+            </form>
         {% else %}
             <form method="post" action="{% url 'inscrever_evento' evento.id %}">
                 {% csrf_token %}
                 <button type="submit">Inscrever-se</button>
             </form>
         {% endif %}
-    </div>
 
+        <a href="{% url 'pagina_principal' %}"      class="btn-voltar">Voltar para a Página Principal</a>
+    </div>
+ 
 </body>
 </html>
