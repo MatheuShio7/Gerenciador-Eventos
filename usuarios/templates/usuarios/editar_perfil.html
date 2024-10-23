@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Perfil</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f7f7f7;
+            margin: 0;
+            padding: 20px;
+        }
+
+        h1 {
+            color: #333;
+        }
+
+        form {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: bold;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 10px;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+        }
+
+        .btn-submit {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #007bff;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-voltar {
+            background-color: #28a745;
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+        }
+
+        .btn-voltar:hover {
+            background-color: #218838;
+        }
+    </style>
+</head>
+<body>
+
+    <h1>Editar Perfil</h1>
+    <form method="POST">
+        {% csrf_token %}
+        {{ user_form.as_p }}
+
+        <button type="submit" name="salvar" class="btn-submit">Salvar Alterações</button>
+        <a href="{% url 'perfil_usuario' %}" class="btn-voltar">Voltar para Perfil</a>
+    </form>
+
+    <h2>Alterar Senha</h2>
+    <form method="POST">
+        {% csrf_token %}
+        {{ senha_form.as_p }}
+
+        <button type="submit" name="alterar_senha" class="btn-submit">Alterar Senha</button>
+    </form>
+
+    {% if senha_form.non_field_errors %}
+        <div class="error">
+            {{ senha_form.non_field_errors }}
+        </div>
+    {% endif %}
+
+</body>
+</html>

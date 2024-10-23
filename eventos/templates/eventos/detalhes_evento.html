@@ -41,6 +41,21 @@
         .btn-voltar {
             background-color: #007bff; 
         }
+
+        .btn-deletar {
+            display: inline-block;
+            padding: 10px 20px;
+            background-color: #dc3545;
+            color: white;
+            text-decoration: none;
+            border-radius: 5px;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-deletar:hover {
+            background-color: #c82333;
+        }
     </style>
 </head>
 <body>
@@ -54,8 +69,12 @@
         <p><strong>Limite de Convidados:</strong> {{ evento.limite_convidados }}</p>
 
         {% if evento.criador == request.user %}
-        <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>
-        <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">Editar Evento</a>
+            <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>
+            <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">Editar Evento</a>
+            <form method="post" action="{% url 'deletar_evento' evento.id %}" style="margin-top: 10px;">
+                {% csrf_token %}
+                <button type="submit" class="btn-deletar">Excluir Evento</button>
+            </form>
         {% elif request.user in evento.convidados.all %}
             <form method="post" action="{% url 'desinscrever_evento' evento.id %}">
                 {% csrf_token %}

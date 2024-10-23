@@ -2,6 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventoForm
 from .models import Evento
 from django.contrib.auth.decorators import login_required
+from django.http import HttpResponseForbidden
 
 
 def criar_evento(request):
@@ -52,6 +53,17 @@ def desinscrever_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
 
     if request.user in evento.convidados.all():
-        evento.convidados.remove(request.user)  # Remove o usuário da lista de convidados
+        evento.convidados.remove(request.user)  
 
     return redirect('pagina_principal')
+
+
+@login_required
+def deletar_evento(request, evento_id):
+    evento = get_object_or_404(Evento, id=evento_id)
+    
+    if request.user == evento.criador:
+        evento.delete()
+        return redirect('pagina_principal')
+    else:
+        return HttpResponseForbidden("Você não tem permissão para excluir este evento.")
