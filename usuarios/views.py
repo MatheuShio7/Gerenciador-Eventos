@@ -40,15 +40,14 @@ def login_view(request):
 
 @login_required
 def pagina_principal(request):
-    # Buscar os eventos criados pelo usuário
-    eventos_usuario = Evento.objects.filter(criador=request.user)
+    eventos_usuario = Evento.objects.filter(convidados=request.user)
 
-    # Buscar eventos públicos, mas excluindo os criados pelo usuário
-    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(criador=request.user)
+    # Buscar eventos públicos onde o usuário NÃO está inscrito
+    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(convidados=request.user)
 
     context = {
-        'eventos_usuario': eventos_usuario,
-        'eventos_publicos': eventos_publicos,
+        'eventos_usuario': eventos_usuario,  # Eventos em que o usuário está inscrito
+        'eventos_publicos': eventos_publicos,  # Eventos públicos onde o usuário não está inscrito
     }
 
     return render(request, 'usuarios/pagina_principal.html', context)

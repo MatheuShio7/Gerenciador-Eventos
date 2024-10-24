@@ -45,7 +45,7 @@ def inscrever_evento(request, evento_id):
         evento.convidados.add(request.user)
         evento.save()
 
-    return redirect('pagina_principal')    
+    return redirect('pagina_principal')     
 
 
 @login_required
