@@ -6,32 +6,63 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #f7f7f7;
+    background-color: #d4d4d4;
     margin: 0;
+}
+
+header {
+    display: flex;
+    justify-content: center; 
+    align-items: center; 
+    position: relative; 
     padding: 20px;
 }
 
-h1, h2 {
-    color: #333;
+img {
+    display: block;
+    width: 250px;
+    margin: auto;
+}
+
+.btn-perfil {
+    position: absolute; 
+    top: 40px; 
+    right: 50px; 
+    color: #5E17EB; 
+    font-size: 24px; 
+    text-decoration: none; 
+}
+
+.btn-perfil:hover {
+    color: #6f27ff;
+}
+
+i {
+    font-size: 40px;
 }
 
 .section {
+    width: 70%;
+
+    margin: auto;
     margin-bottom: 20px;
     padding: 15px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.hr-eventos {
+    
 }
 
 .section h1 {
     margin-bottom: 20px;
+    color: black;
 }
 
 .meus-eventos,
 .eventos-publicos {
     display: flex;
     flex-wrap: wrap;
-    gap: 15px; 
+    gap: 15px;
 }
 
 .meus-eventos {
@@ -42,22 +73,13 @@ h1, h2 {
     height: 180px;
 }
 
-.meus-eventos .event-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    width: 250px;
-}
-
+.meus-eventos .event-card,
 .eventos-publicos .event-card {
-    border: 1px solid #ccc;
-    border-radius: 10px;
-    padding: 15px;
-    background-color: #fff;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     width: 250px;
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #5E17EB;
+    border-radius: 10px;
 }
 
 .event-card-link {
@@ -84,15 +106,15 @@ h1, h2 {
     height: 100%;
     display: flex;
     align-items: center;
-    color: #333;
+    color: #5E17EB;
     padding-inline: 40px;
-    border: 1px solid #ccc;
+    border: 1px solid #5E17EB;
     border-radius: 10px;
     transition: 0.3s;
 }
 
 .create-event-btn:hover {
-    color: #4b4b4b;
+    color: #5E17EB;
     transform: scale(1.05);
 }
 
@@ -107,4 +129,4 @@ h1, h2 {
     overflow: hidden;
     text-overflow: ellipsis;
     white-space: normal;
-}
+} 

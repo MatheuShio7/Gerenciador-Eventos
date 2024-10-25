@@ -5,6 +5,7 @@ from .forms import UsuarioForm, EditarPerfilForm, AlterarSenhaForm
 from eventos.models import Evento
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
+from django.db.models import Q
 
 
 def home(request):
@@ -40,14 +41,19 @@ def login_view(request):
 
 @login_required
 def pagina_principal(request):
-    eventos_usuario = Evento.objects.filter(convidados=request.user)
+    # Buscar eventos criados pelo usuário OU nos quais o usuário está inscrito (Meus Eventos)
+    eventos_usuario = Evento.objects.filter(
+        Q(criador=request.user) | Q(convidados=request.user)
+    ).distinct()
 
-    # Buscar eventos públicos onde o usuário NÃO está inscrito
-    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(convidados=request.user)
+    # Buscar eventos públicos onde o usuário NÃO está inscrito e que ele não criou
+    eventos_publicos = Evento.objects.filter(visibilidade='publico').exclude(
+        Q(convidados=request.user) | Q(criador=request.user)
+    )
 
     context = {
-        'eventos_usuario': eventos_usuario,  # Eventos em que o usuário está inscrito
-        'eventos_publicos': eventos_publicos,  # Eventos públicos onde o usuário não está inscrito
+        'eventos_usuario': eventos_usuario,  # Meus eventos (criados ou inscritos)
+        'eventos_publicos': eventos_publicos,  # Eventos públicos (não inscritos)
     }
 
     return render(request, 'usuarios/pagina_principal.html', context)

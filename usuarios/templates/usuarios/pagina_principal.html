@@ -10,8 +10,15 @@
     <link rel="stylesheet" href="{% static 'css/pagina_principal.css' %}">
 </head>
 <body>
+    <header>
+        <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
+        <a href="{% url 'perfil_usuario' %}" class="btn-perfil">
+            <i class="bi bi-person-circle"></i>
+        </a>
+    </header>
     <div class="section">
         <h1>Meus Eventos</h1>
+        <hr>
         <div class="meus-eventos">
             <a href="{% url 'criar_evento' %}" class="create-event-btn">
                 <i class="bi bi-plus-circle-fill"></i>
@@ -20,7 +27,7 @@
                 <a href="{% url 'detalhes_evento' evento.id %}" class="event-card-link">
                     <div class="event-card">
                         <h3>{{ evento.nome }}</h3>
-                        <p><strong>Data/Hora:</strong> {{ evento.data_hora }}</p>
+                        <p><strong>Data/Hora:</strong> {{ evento.data_hora|date:"d/m/y \à\s H:i" }}</p>
                         <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
                         <p class="descricao"><strong>Descrição:</strong> {{ evento.descricao }}</p>
                     </div>
@@ -31,6 +38,7 @@
 
     <div class="section">
         <h1>Eventos Públicos</h1>
+        <hr class="hr-eventos">
         <div class="eventos-publicos">
             {% if eventos_publicos %}
                 {% for evento in eventos_publicos %}
@@ -38,7 +46,7 @@
                         <div class="event-card">
                             <h3>{{ evento.nome }}</h3>
                             <p><strong>Criador:</strong> {{ evento.criador.username }}</p>
-                            <p><strong>Data/Hora:</strong> {{ evento.data_hora }}</p>
+                            <p><strong>Data/Hora:</strong> {{ evento.data_hora|date:"d/m/y \à\s H:i" }}</p>
                             <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
                             <p class="descricao"><strong>Descrição:</strong> {{ evento.descricao }}</p>
                         </div>
@@ -48,12 +56,6 @@
                 <p>Atualmente não há eventos públicos disponíveis.</p>
             {% endif %}
         </div>
-    </div>
-
-    <div class="section">
-        <a href="{% url 'perfil_usuario' %}" class="btn-perfil">
-            <i class="bi bi-person-circle"></i> Meu Perfil
-        </a>
     </div>
 </body>
 </html>

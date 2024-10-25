@@ -45,7 +45,7 @@ def inscrever_evento(request, evento_id):
         evento.convidados.add(request.user)
         evento.save()
 
-    return redirect('pagina_principal')     
+    return redirect('detalhes_evento', evento_id=evento.id)     
 
 
 @login_required
@@ -55,7 +55,7 @@ def desinscrever_evento(request, evento_id):
     if request.user in evento.convidados.all():
         evento.convidados.remove(request.user)  
 
-    return redirect('pagina_principal')
+    return redirect('detalhes_evento', evento_id=evento.id)
 
 
 @login_required
