@@ -6,7 +6,7 @@
 
 body {
     font-family: Arial, sans-serif;
-    background-color: #d4d4d4;
+    background-color: #ffffff;
     margin: 0;
 }
 
@@ -31,10 +31,12 @@ img {
     color: #5E17EB; 
     font-size: 24px; 
     text-decoration: none; 
+    transition: 0.3s;
 }
 
 .btn-perfil:hover {
     color: #6f27ff;
+    transform: scale(1.03);
 }
 
 i {
@@ -42,20 +44,15 @@ i {
 }
 
 .section {
-    width: 70%;
-
+    width: 60%;
     margin: auto;
-    margin-bottom: 20px;
+    margin-top: 40px;
     padding: 15px;
 }
 
 .hr-eventos {
-    
-}
-
-.section h1 {
     margin-bottom: 20px;
-    color: black;
+    border: 1px solid #f6d30ba9;
 }
 
 .meus-eventos,
@@ -65,21 +62,25 @@ i {
     gap: 15px;
 }
 
-.meus-eventos {
-    height: 160px;
-}
-
-.eventos-publicos {
+.create-event-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 125px;
     height: 180px;
-}
-
-.meus-eventos .event-card,
-.eventos-publicos .event-card {
-    width: 250px;
-    padding: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    color: #5E17EB;
     border: 1px solid #5E17EB;
     border-radius: 10px;
+    transition: 0.3s;
+}
+
+.create-event-btn:hover {
+    color: #5E17EB;
+    transform: scale(1.03);
+}
+
+.create-event-btn i {
+    font-size: 40px;
 }
 
 .event-card-link {
@@ -89,7 +90,21 @@ i {
 }
 
 .event-card-link:hover {
-    transform: scale(1.02);
+    transform: scale(1.03);
+}
+
+.meus-eventos .event-card,
+.eventos-publicos .event-card {
+    width: 250px; 
+    height: 180px; 
+    padding: 15px;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    border: 1px solid #5E17EB;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between; /* Distribui espaço entre os elementos */
+    overflow: hidden;
 }
 
 .event-card h3 {
@@ -98,28 +113,6 @@ i {
 
 .event-card p {
     margin-bottom: 5px;
-}
-
-.create-event-btn {
-    align-self: center;
-    justify-self: center;
-    height: 100%;
-    display: flex;
-    align-items: center;
-    color: #5E17EB;
-    padding-inline: 40px;
-    border: 1px solid #5E17EB;
-    border-radius: 10px;
-    transition: 0.3s;
-}
-
-.create-event-btn:hover {
-    color: #5E17EB;
-    transform: scale(1.05);
-}
-
-.create-event-btn i {
-    font-size: 40px;
 }
 
 .event-card p.descricao {
