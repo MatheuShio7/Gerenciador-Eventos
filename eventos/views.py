@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, get_object_or_404
 from .forms import EventoForm
 from .models import Evento
 from django.contrib.auth.decorators import login_required
-from django.http import HttpResponseForbidden
+from django.http import HttpResponseForbidden, JsonResponse
 
 
 def criar_evento(request):
@@ -20,8 +20,15 @@ def criar_evento(request):
 
 def detalhes_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
-    return render(request, 'eventos/detalhes_evento.html', {'evento': evento})
+    # Verifica se o usuário está inscrito no evento
+    inscrito = request.user in evento.convidados.all()
 
+    context = {
+        'evento': evento,
+        'inscrito': inscrito,
+    }
+
+    return render(request, 'eventos/detalhes_evento.html', context)
 
 def editar_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
@@ -41,21 +48,30 @@ def editar_evento(request, evento_id):
 def inscrever_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
 
-    if request.user not in evento.convidados.all():
-        evento.convidados.add(request.user)
-        evento.save()
+    if request.method == "POST":
+        if request.user not in evento.convidados.all():
+            evento.convidados.add(request.user)
+            evento.save()
+            return JsonResponse({"inscrito": True})
+        else:
+            return JsonResponse({"inscrito": False})  # Se já está inscrito, retornar False
 
-    return redirect('detalhes_evento', evento_id=evento.id)     
+    return JsonResponse({"error": "Método não permitido"}, status=405)
 
 
 @login_required
 def desinscrever_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
 
-    if request.user in evento.convidados.all():
-        evento.convidados.remove(request.user)  
+    if request.method == "POST":
+        if request.user in evento.convidados.all():
+            evento.convidados.remove(request.user)
+            evento.save()
+            return JsonResponse({"inscrito": False})  # Retorna False, pois o usuário não está mais inscrito
+        else:
+            return JsonResponse({"inscrito": True})  # Retorna True, pois o usuário não estava inscrito
 
-    return redirect('detalhes_evento', evento_id=evento.id)
+    return JsonResponse({"error": "Método não permitido"}, status=405)
 
 
 @login_required

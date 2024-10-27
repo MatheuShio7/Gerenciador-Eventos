@@ -29,17 +29,13 @@
             margin-bottom: 10px;
         }
 
-        .btn-inscrever, .btn-voltar, .btn-editar {
+        .btn-inscrever, .btn-editar {
             display: inline-block;
             padding: 10px 20px;
             background-color: #28a745;
             color: white;
             text-decoration: none;
             border-radius: 5px;
-        }
-
-        .btn-voltar {
-            background-color: #007bff; 
         }
 
         .btn-deletar {
@@ -75,20 +71,75 @@
                 {% csrf_token %}
                 <button type="submit" class="btn-deletar">Excluir Evento</button>
             </form>
-        {% elif request.user in evento.convidados.all %}
-            <form method="post" action="{% url 'desinscrever_evento' evento.id %}">
-                {% csrf_token %}
-                <button type="submit">Desinscrever-se</button>
-            </form>
         {% else %}
-            <form method="post" action="{% url 'inscrever_evento' evento.id %}">
-                {% csrf_token %}
-                <button type="submit">Inscrever-se</button>
-            </form>
+            <button id="inscreverBtn" data-url="{% url 'inscrever_evento' evento.id %}" data-inscrito="{{ inscrito|yesno:'true,false' }}">
+                {% if inscrito %}Desinscrever-se{% else %}Inscrever-se{% endif %}
+            </button>
         {% endif %}
-
-        <a href="{% url 'pagina_principal' %}"      class="btn-voltar">Voltar para a Página Principal</a>
     </div>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function() {
+            const inscreverBtn = document.querySelector("#inscreverBtn");
+
+            if (inscreverBtn) {
+                inscreverBtn.addEventListener("click", function(event) {
+                    event.preventDefault();
+                    const url = inscreverBtn.getAttribute("data-url");
+                    
+                    console.log(url);
+                    fetch(url, {
+                        method: "POST",
+                        headers: {
+                            "X-CSRFToken": "{{ csrf_token }}",
+                            "Content-Type": "application/json",
+                        }
+                    })
+                    .then(response => response.json())
+                    .then(data => {
+                        if (data.inscrito) {
+                            inscreverBtn.textContent = "Desinscrever-se";
+                            inscreverBtn.setAttribute("data-inscrito", "true");
+                        } else {
+                            inscreverBtn.textContent = "Inscrever-se";
+                            inscreverBtn.setAttribute("data-inscrito", "false");
+                        }
+                    })
+                    .catch(error => console.error("Erro:", error));
+                });
+            }
+        });
+        
+        function toggleInscricao(event) {
+            event.preventDefault();
+
+            const inscreverBtn = document.getElementById("inscreverBtn");
+            const inscrito = inscreverBtn.getAttribute("data-inscrito") === "true";
+            const eventoId = inscreverBtn.getAttribute("data-evento-id");
+            const url = inscrito 
+                ? `/eventos/desinscrever/${eventoId}/` 
+                : `/eventos/inscrever/${eventoId}/`;
+
+            fetch(url, {
+                method: "POST",
+                headers: {
+                    "X-CSRFToken": "{{ csrf_token }}",
+                    "Content-Type": "application/json",
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.inscrito) {
+                    inscreverBtn.textContent = "Desinscrever-se";
+                    inscreverBtn.setAttribute("data-inscrito", "true");
+                } else {
+                    inscreverBtn.textContent = "Inscrever-se";
+                    inscreverBtn.setAttribute("data-inscrito", "false");
+                }
+            })
+            .catch(error => console.error("Erro:", error));
+        }
+    </script>
  
 </body>
 </html>

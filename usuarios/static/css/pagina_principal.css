@@ -5,28 +5,28 @@
 }
 
 body {
-    font-family: Arial, sans-serif;
+    font-family: 'Nunito', sans-serif;
     background-color: #ffffff;
     margin: 0;
 }
 
 header {
     display: flex;
-    justify-content: center; 
+    justify-content: center;
     align-items: center; 
     position: relative; 
     padding: 20px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.250);
 }
 
-img {
+header img {
     display: block;
-    width: 250px;
+    width: 150px;
     margin: auto;
 }
 
 .btn-perfil {
     position: absolute; 
-    top: 40px; 
     right: 50px; 
     color: #5E17EB; 
     font-size: 24px; 
@@ -107,17 +107,9 @@ i {
     overflow: hidden;
 }
 
-.event-card h3 {
-    margin-bottom: 7px;
-}
-
-.event-card p {
-    margin-bottom: 5px;
-}
-
 .event-card p.descricao {
     display: -webkit-box;
-    -webkit-line-clamp: 2; 
+    line-clamp: 2; 
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;
