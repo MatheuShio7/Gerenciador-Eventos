@@ -89,13 +89,5 @@
         </div>
     {% endif %}
 
-    <h2>Excluir Conta</h2>
-    <form method="POST" action="{% url 'excluir_conta' %}">
-        {% csrf_token %}
-        <button type="submit" class="btn-delete" onclick="return confirm('Tem certeza que deseja excluir sua conta? Esta ação não pode ser desfeita.')">
-            Excluir Conta
-        </button>        
-    </form>
-
 </body>
 </html>

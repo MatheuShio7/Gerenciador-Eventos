@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from django.contrib.auth import login, authenticate, update_session_auth_hash, logout
+from django.contrib.auth import login, authenticate, update_session_auth_hash
 from django.contrib.auth.forms import AuthenticationForm
 from .forms import UsuarioForm, EditarPerfilForm, AlterarSenhaForm
 from eventos.models import Evento
@@ -91,12 +91,3 @@ def editar_perfil(request):
         'user_form': user_form,
         'senha_form': senha_form,
     })
-
-
-@login_required
-def excluir_conta(request):
-    if request.method == 'POST':
-        user = request.user
-        user.delete()
-        logout(request)  # Desloga o usuário após a exclusão da conta
-        return redirect('home')  # Redireciona para uma página inicial ou de confirmação
