@@ -67,7 +67,7 @@ def perfil_usuario(request):
 @login_required
 def editar_perfil(request):
     user_form = EditarPerfilForm(instance=request.user)
-    senha_form = AlterarSenhaForm(request.user)  # Cria uma instância do formulário de alterar senha
+    senha_form = AlterarSenhaForm(request.user)  # Instância do formulário para alterar senha
 
     if request.method == 'POST':
         # Verifica se o formulário de edição de perfil foi enviado
@@ -77,13 +77,13 @@ def editar_perfil(request):
                 user_form.save()
                 messages.success(request, 'Seu perfil foi atualizado com sucesso!')
                 return redirect('perfil_usuario')
-
+        
         # Verifica se o formulário de alteração de senha foi enviado
         elif 'alterar_senha' in request.POST:
             senha_form = AlterarSenhaForm(request.user, request.POST)
             if senha_form.is_valid():
                 user = senha_form.save()
-                update_session_auth_hash(request, user)  # Mantém o usuário logado após a mudança de senha
+                update_session_auth_hash(request, user)
                 messages.success(request, 'Sua senha foi alterada com sucesso!')
                 return redirect('perfil_usuario')
 

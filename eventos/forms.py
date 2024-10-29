@@ -1,4 +1,5 @@
 from django import forms
+from django.utils import timezone
 from .models import Evento
 
 class EventoForm(forms.ModelForm):
@@ -21,3 +22,15 @@ class EventoForm(forms.ModelForm):
             'limite_convidados': 'Limite de Convidados',
             'visibilidade': 'Visibilidade',
         }
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        if self.instance and self.instance.data_hora:
+            # Formata a data/hora para o formato correto ao carregar o formulário
+            self.initial['data_hora'] = self.instance.data_hora.strftime('%Y-%m-%dT%H:%M')
+
+    def clean_data_hora(self):
+        data_hora = self.cleaned_data.get('data_hora')
+        if data_hora and data_hora < timezone.now():
+            raise forms.ValidationError("A data e hora não podem ser no passado.")
+        return data_hora
