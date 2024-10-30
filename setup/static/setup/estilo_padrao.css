@@ -1,0 +1,20 @@
+:root {
+    --roxo: #5E17EB; 
+    --roxo-hover: #6f27ff;
+    --amarelo: #f6d30ba9;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+}
+
+.hr-eventos {
+    margin-bottom: 20px;
+    border: 1px solid var(--amarelo);
+}

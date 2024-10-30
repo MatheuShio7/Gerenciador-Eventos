@@ -1,15 +1,3 @@
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-}
-
-body {
-    font-family: 'Nunito', sans-serif;
-    background-color: #ffffff;
-    margin: 0;
-}
-
 header {
     display: flex;
     justify-content: center; 
@@ -29,14 +17,14 @@ header img {
 .btn-perfil {
     position: absolute; 
     right: 50px; 
-    color: #5E17EB; 
+    color: var(--roxo); 
     font-size: 24px; 
     text-decoration: none; 
     transition: 0.3s;
 }
 
 .btn-perfil:hover {
-    color: #6f27ff;
+    color: var(--roxo-hover);
     transform: scale(1.03);
 }
 
@@ -49,11 +37,6 @@ i {
     margin: auto;
     margin-bottom: 40px;
     padding: 15px;
-}
-
-.hr-eventos {
-    margin-bottom: 20px;
-    border: 1px solid #f6d30ba9;
 }
 
 .meus-eventos,
@@ -69,14 +52,13 @@ i {
     justify-content: center;
     width: 125px;
     height: 180px;
-    color: #5E17EB;
-    border: 1px solid #5E17EB;
+    color: var(--roxo);
+    border: 1px solid var(--roxo);
     border-radius: 10px;
     transition: 0.3s;
 }
 
 .create-event-btn:hover {
-    color: #5E17EB;
     transform: scale(1.03);
 }
 
@@ -91,7 +73,7 @@ i {
 }
 
 .event-card-link:hover {
-    transform: scale(1.03);
+    transform: scale(1.02);
 }
 
 .meus-eventos .event-card,
@@ -100,17 +82,17 @@ i {
     height: 180px; 
     padding: 15px;
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
-    border: 1px solid #5E17EB;
+    border: 1px solid var(--roxo);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
-    justify-content: space-between; /* Distribui espaço entre os elementos */
+    justify-content: space-between;
     overflow: hidden;
 }
 
 .event-card p.descricao {
     display: -webkit-box;
-    line-clamp: 2; 
+    line-clamp: 2;
     -webkit-box-orient: vertical;
     overflow: hidden;
     text-overflow: ellipsis;

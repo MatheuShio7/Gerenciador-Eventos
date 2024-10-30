@@ -3,6 +3,7 @@ from .forms import EventoForm
 from .models import Evento
 from django.contrib.auth.decorators import login_required
 from django.http import HttpResponseForbidden
+from django.contrib import messages
 
 
 def criar_evento(request):
@@ -41,8 +42,13 @@ def editar_evento(request, evento_id):
 def inscrever_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
 
+    if evento.convidados.count() >= evento.limite_convidados:
+        messages.error(request, "O limite de convidados para este evento foi atingido.")
+        return redirect('detalhes_evento', evento_id=evento.id)
+
     if request.user not in evento.convidados.all():
         evento.convidados.add(request.user)
+        messages.success(request, "Inscrição realizada com sucesso!")
         evento.save()
 
     return redirect('detalhes_evento', evento_id=evento.id)     
