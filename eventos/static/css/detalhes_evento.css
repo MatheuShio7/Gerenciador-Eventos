@@ -11,13 +11,18 @@ img {
 }
 
 .event-details {
+    position: relative;
     align-self: center;
     width: 50%;
-    padding: 60px;
+    padding: 90px 75px 60px 75px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 3px var(--roxo);
     border: 2px solid var(--roxo);
+}
+
+.hr-eventos {
+    margin-bottom: 30px;
 }
 
 .event-details p {
@@ -25,35 +30,64 @@ img {
     font-size: 1.1em;
 }
 
-.btn-inscrever, .btn-voltar, .btn-editar {
+.event-details p:last-of-type {
+    margin-bottom: 30px; 
+}
+
+.botoes {
+    display: flex;
+    gap: 30px;
+}
+
+.btn-editar, .btn-deletar, .btn-inscrever, .btn-desinscrever, .btn-voltar {
     display: inline-block;
-    padding: 10px 20px;
-    background-color: #28a745;
-    color: white;
+    cursor: pointer;
+    padding: 7.5px 15px;
+    font-size: 1.5em;
     text-decoration: none;
-    border-radius: 5px;
+    border-radius: 15px;
+    font-weight: bolder;
+    color: var(--roxo);
+    background-color: white;
+    border: 2px solid var(--roxo);
+    transition: 0.3s;
 }
 
 .btn-voltar {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #007bff; 
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
+    position: absolute;
+    top: 20px; 
+    left: 20px;
 }
 
-.btn-deletar {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: #dc3545;
-    color: white;
-    text-decoration: none;
-    border-radius: 5px;
-    border: none;
-    cursor: pointer;
+.btn-inscrever {
+    color: blue;
+    border: 2px solid blue;
+    font-size: 1.07em;
 }
 
-.btn-deletar:hover {
-    background-color: #c82333;
+.btn-inscrever:hover {
+    background-color: blue;
+    color: white;
+}
+
+.btn-desinscrever {
+    color: red;
+    border: 2px solid red;
+    font-size: 1.07em;
+}
+
+.btn-desinscrever:hover {
+    background-color: red;
+    color: white;
+}
+
+.btn-editar:hover, .btn-deletar:hover, .btn-voltar:hover {
+    background-color: var(--roxo);
+    color: white;
+}
+
+.alert {
+    margin-top: 20px;
+    font-size: 1.2em;
+    color: red;
 }

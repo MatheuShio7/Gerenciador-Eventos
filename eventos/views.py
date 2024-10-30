@@ -43,15 +43,14 @@ def inscrever_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
 
     if evento.convidados.count() >= evento.limite_convidados:
-        messages.error(request, "O limite de convidados para este evento foi atingido.")
+        messages.error(request, "ERRO: O limite de convidados para este evento foi atingido.")
         return redirect('detalhes_evento', evento_id=evento.id)
 
     if request.user not in evento.convidados.all():
         evento.convidados.add(request.user)
-        messages.success(request, "Inscrição realizada com sucesso!")
         evento.save()
 
-    return redirect('detalhes_evento', evento_id=evento.id)     
+    return redirect('pagina_principal')     
 
 
 @login_required
@@ -61,7 +60,7 @@ def desinscrever_evento(request, evento_id):
     if request.user in evento.convidados.all():
         evento.convidados.remove(request.user)  
 
-    return redirect('detalhes_evento', evento_id=evento.id)
+    return redirect('pagina_principal')
 
 
 @login_required

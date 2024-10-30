@@ -15,9 +15,16 @@
     <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
     
     <div class="event-details">
+        <a href="{% url 'pagina_principal' %}" class="btn-voltar">
+            <i class="bi bi-chevron-left"></i>
+        </a>
         <h1>{{ evento.nome }}</h1>
         <hr class="hr-eventos">
-        <p><strong>Criador:</strong> {{ evento.criador.username }}</p>
+
+        {% if evento.criador != request.user %}
+            <p><strong>Criador:</strong> {{ evento.criador.username }}</p>
+        {% endif %}
+
         <p><strong>Data e Hora:</strong> {{ evento.data_hora }}</p>
         <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
         <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
@@ -25,24 +32,31 @@
 
         {% if evento.criador == request.user %}
             <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>
-            <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">Editar Evento</a>
-            <form method="post" action="{% url 'deletar_evento' evento.id %}">
-                {% csrf_token %}
-                <button type="submit" class="btn-deletar">Excluir Evento</button>
-            </form>
-        {% elif request.user in evento.convidados.all %}
-            <form method="post" action="{% url 'desinscrever_evento' evento.id %}">
-                {% csrf_token %}
-                <button type="submit">Desinscrever-se</button>
-            </form>
-        {% else %}
-            <form method="post" action="{% url 'inscrever_evento' evento.id %}">
-                {% csrf_token %}
-                <button type="submit">Inscrever-se</button>
-            </form>
         {% endif %}
 
-        <a href="{% url 'pagina_principal' %}" class="btn-voltar">Voltar para a Página Principal</a>
+        <div class="botoes">
+            {% if evento.criador == request.user %}
+                <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">
+                    <i class="bi bi-pencil-square"></i>
+                </a>
+                <form method="post" action="{% url 'deletar_evento' evento.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-deletar">
+                        <i class="bi bi-trash3"></i>
+                    </button>
+                </form>
+            {% elif request.user in evento.convidados.all %}
+                <form method="post" action="{% url 'desinscrever_evento' evento.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-desinscrever">Desinscrever-se</button>
+                </form>
+            {% else %}
+                <form method="post" action="{% url 'inscrever_evento' evento.id %}">
+                    {% csrf_token %}
+                    <button type="submit" class="btn-inscrever">Inscrever-se</button>
+                </form>
+            {% endif %}
+        </div>
 
         {% if messages %}
         {% for message in messages %}

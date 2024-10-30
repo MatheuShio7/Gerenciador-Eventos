@@ -50,11 +50,12 @@ i {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 125px;
-    height: 180px;
+    width: 150px;
+    height: 200px;
     color: var(--roxo);
     border: 1px solid var(--roxo);
     border-radius: 10px;
+    box-shadow: 0 0 2px var(--roxo);
     transition: 0.3s;
 }
 
@@ -79,9 +80,9 @@ i {
 .meus-eventos .event-card,
 .eventos-publicos .event-card {
     width: 250px; 
-    height: 180px; 
+    height: 200px; 
     padding: 15px;
-    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 0 2px var(--roxo);
     border: 1px solid var(--roxo);
     border-radius: 10px;
     display: flex;
@@ -92,9 +93,9 @@ i {
 
 .event-card p.descricao {
     display: -webkit-box;
-    line-clamp: 2;
+    -webkit-line-clamp: 2; /* Limita o texto a 2 linhas */
     -webkit-box-orient: vertical;
     overflow: hidden;
-    text-overflow: ellipsis;
+    text-overflow: ellipsis; /* Adiciona "..." no final */
     white-space: normal;
-}
+} 
