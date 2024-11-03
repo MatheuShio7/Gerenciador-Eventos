@@ -28,7 +28,7 @@
         <p><strong>Data e Hora:</strong> {{ evento.data_hora }}</p>
         <p><strong>Endereço:</strong> {{ evento.endereco }}</p>
         <p><strong>Descrição:</strong> {{ evento.descricao }}</p>
-        <p><strong>Limite de Convidados:</strong> {{ evento.limite_convidados }}</p>
+        <p><strong>Participantes Inscritos:</strong> {{ evento.convidados.count }} / {{ evento.limite_convidados }}</p>
 
         {% if evento.criador == request.user %}
             <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>

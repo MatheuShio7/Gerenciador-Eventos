@@ -31,6 +31,12 @@ class EditarPerfilForm(forms.ModelForm):
         model = Usuario
         fields = ['username', 'email', 'data_nascimento', 'sexo']
 
+    def clean_data_nascimento(self):
+        data_nascimento = self.cleaned_data.get('data_nascimento')
+        if data_nascimento >= timezone.now().date():
+            raise ValidationError("A data de nascimento não pode ser no futuro.")
+        return data_nascimento 
+
 
 class AlterarSenhaForm(PasswordChangeForm):
     class Meta:

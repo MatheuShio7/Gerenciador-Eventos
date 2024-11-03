@@ -75,7 +75,6 @@ def editar_perfil(request):
             user_form = EditarPerfilForm(request.POST, instance=request.user)
             if user_form.is_valid():
                 user_form.save()
-                messages.success(request, 'Seu perfil foi atualizado com sucesso!')
                 return redirect('perfil_usuario')
         
         # Verifica se o formulário de alteração de senha foi enviado
@@ -84,7 +83,6 @@ def editar_perfil(request):
             if senha_form.is_valid():
                 user = senha_form.save()
                 update_session_auth_hash(request, user)
-                messages.success(request, 'Sua senha foi alterada com sucesso!')
                 return redirect('perfil_usuario')
 
     return render(request, 'usuarios/editar_perfil.html', {
