@@ -3,14 +3,63 @@
 <head>
     <meta charset="UTF-8">
     <title>Login</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
+
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'setup/estilo_padrao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/login.css' %}">
 </head>
 <body>
-    <h2>Login</h2>
-    <form method="POST">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <button type="submit">Entrar</button>
-    </form>
-    <p>Não possui uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>.</p>
+    <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
+    <div class="login-container">
+        <a href="{% url 'home' %}" class="btn-voltar">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+        <h1>Login</h1>
+        <hr class="hr-eventos">
+
+        <form method="POST">
+            {% csrf_token %}
+
+            <!-- Campo Username com tratamento de erro -->
+            <div class="form-group {% if form.username.errors %}field-error{% endif %}">
+                {{ form.username.label_tag }}
+                {{ form.username }}
+                {% if form.username.errors %}
+                    <div class="error-message">
+                        {% for error in form.username.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Campo Password com tratamento de erro -->
+            <div class="form-group {% if form.password.errors %}field-error{% endif %}">
+                {{ form.password.label_tag }}
+                {{ form.password }}
+                {% if form.password.errors %}
+                    <div class="error-message">
+                        {% for error in form.password.errors %}
+                            <p>{{ error }}</p>
+                        {% endfor %}
+                    </div>
+                {% endif %}
+            </div>
+
+            <!-- Exibe os erros gerais do formulário -->
+            {% if form.non_field_errors %}
+                <div class="error-message">
+                    {% for error in form.non_field_errors %}
+                        <p>{{ error }}</p>
+                    {% endfor %}
+                </div>
+            {% endif %}
+
+            <button type="submit" class="btn-entrar">Entrar</button>
+        </form>
+
+        <p>Não possui uma conta? <a href="{% url 'cadastro' %}">Cadastre-se</a>.</p>
+    </div>
 </body>
 </html>

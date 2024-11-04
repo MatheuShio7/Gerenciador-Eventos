@@ -10,7 +10,7 @@ img {
     padding-block: 30px;
 }
 
-.event-details {
+.login-container {
     position: relative;
     align-self: center;
     width: 50%;
@@ -21,24 +21,21 @@ img {
     border: 2px solid var(--roxo);
 }
 
-.event-details p {
+.btn-entrar {
+    display: inline-block;
+    cursor: pointer;
+    padding: 7.5px 15px;
     margin-bottom: 15px;
     font-size: 1.1em;
+    text-decoration: none;
+    border-radius: 15px;
+    font-weight: bolder;
+    color: var(--roxo);
+    background-color: white;
+    border: 2px solid var(--roxo);
+    transition: 0.3s;
 }
 
-.event-details p:last-of-type {
-    margin-bottom: 30px;
-}
-
-.botoes {
-    display: flex;
-    gap: 30px;
-}
-
-.btn-editar,
-.btn-deletar,
-.btn-inscrever,
-.btn-desinscrever,
 .btn-voltar {
     display: inline-block;
     cursor: pointer;
@@ -50,46 +47,34 @@ img {
     color: var(--roxo);
     background-color: white;
     border: 2px solid var(--roxo);
-    transition: 0.3s;
-}
-
-.btn-voltar {
     position: absolute;
     top: 20px;
     left: 20px;
+    transition: 0.3s;
 }
 
-.btn-inscrever {
-    color: green;
-    border: 2px solid green;
-    font-size: 1.07em;
-}
-
-.btn-inscrever:hover {
-    background-color: green;
-    color: white;
-}
-
-.btn-desinscrever {
-    color: red;
-    border: 2px solid red;
-    font-size: 1.07em;
-}
-
-.btn-desinscrever:hover {
-    background-color: red;
-    color: white;
-}
-
-.btn-editar:hover,
-.btn-deletar:hover,
-.btn-voltar:hover {
+.btn-voltar:hover, .btn-entrar:hover {
     background-color: var(--roxo);
     color: white;
 }
 
-.alert {
-    margin-top: 20px;
-    font-size: 1.2em;
+.login-container label {
+    font-size: 1.1em;
+    font-weight: bolder; 
+}
+
+.login-container input {
+    font-size: 1em; 
+    padding: 2px;
+    margin-bottom: 15px;
+}
+
+.login-container p a {
+    text-decoration: none;
+    color: var(--roxo);
+}
+
+.error-message {
     color: red;
+    margin-bottom: 15px;
 }
