@@ -15,6 +15,9 @@
 </head>
 <body>
     <header>
+        <a href="{% url 'home' %}" class="btn-logout">
+            <i class="bi bi-box-arrow-left"></i>
+        </a>
         <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
         <a href="{% url 'perfil_usuario' %}" class="btn-perfil">
             <i class="bi bi-person-circle"></i>

@@ -8,6 +8,20 @@ header {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.250);
 }
 
+.btn-logout {
+    position: absolute; 
+    left: 50px; 
+    color: rgb(230, 0, 0); 
+    font-size: 24px; 
+    text-decoration: none; 
+    transition: 0.3s;
+}
+
+.btn-logout:hover {
+    color: red;
+    transform: scale(1.03);
+}
+
 header img {
     display: block;
     width: 150px;
