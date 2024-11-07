@@ -4,161 +4,76 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Criar Novo Evento</title>
-    <style>
-        h1 {
-            font-family: Arial, Helvetica, sans-serif;
-        }
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons/font/bootstrap-icons.css">
 
-        .label-nome-evento, 
-        .label-data-hora-evento,
-        .label-endereco-evento,
-        .label-descricao-evento,
-        .label-limite-convidados-evento,
-        .label-visibilidade-evento {
-            font-size: 18px;
-            font-family: Arial, Helvetica, sans-serif;
-        }
-
-        .form-nome {
-            width: 70%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .form-data-hora {
-            width: 25%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .form-endereco {
-            width: 70%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .form-descricao {
-            width: 70%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .form-limite-convidados {
-            width: 10%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .form-visibilidade {
-            width: 25%;
-            padding: 10px;
-            margin-bottom: 15px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-            font-size: 14px;
-            background-color: #f9f9f9;
-        }
-
-        .btn-container {
-            text-align: center;
-        }
-
-        button {
-            font-size: 18px;
-            padding: 10px;
-        }
-
-        .alert {
-            color: red;
-            border: 1px solid red;
-            background-color: #f9d6d5;
-            padding: 10px;
-            margin-bottom: 15px;
-        }
-
-    </style>
+    {% load static %}
+    <link rel="stylesheet" href="{% static 'setup/estilo_padrao.css' %}">
+    <link rel="stylesheet" href="{% static 'css/criar_evento.css' %}">
 </head>
 <body>
-    <h1>Criar Novo Evento</h1>
+    <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
 
-    <form method="post">
-        {% csrf_token %}
+    <div class="criar-evento-container">
+        <a href="{% url 'pagina_principal' %}" class="btn-voltar">
+            <i class="bi bi-chevron-left"></i>
+        </a>
+        <h1>Criar Novo Evento</h1>
+        <hr class="hr-eventos">
+        <form method="post">
+            {% csrf_token %}
+            <!-- Nome do Evento -->
+            <div class="form-group">
+                <label for="{{ form.nome.id_for_label }}" class="label-nome-evento">Nome do Evento:</label>
+                {{ form.nome }}
+            </div>
+            
+            <!-- Data e Hora -->
+            <div class="form-group">
+                <label for="{{ form.data_hora.id_for_label }}" class="label-data-hora-evento">Data e Hora:</label>
+                {{ form.data_hora }}
+            </div>
 
-        <!-- Exibir erros do formulário -->
-        {% if form.errors %}
-            <div class="alert alert-danger">
-                <ul>
+            <!-- Endereço -->
+            <div class="form-group">
+                <label for="{{ form.endereco.id_for_label }}" class="label-endereco-evento">Endereço:</label>
+                {{ form.endereco }}
+            </div>
+
+            <!-- Descrição -->
+            <div class="form-group descricao">
+                <label for="{{ form.descricao.id_for_label }}" class="label-descricao-evento">Descrição:</label>
+                {{ form.descricao }}
+            </div>
+
+            <!-- Limite de Convidados -->
+            <div class="form-group">
+                <label for="{{ form.limite_convidados.id_for_label }}" class="label-limite-convidados-evento">Limite de Convidados:</label>
+                {{ form.limite_convidados }}
+            </div>
+
+            <!-- Visibilidade -->
+            <div class="form-group visibilidade">
+                <label for="{{ form.visibilidade.id_for_label }}" class="label-visibilidade-evento">Visibilidade:</label>
+                {{ form.visibilidade }}
+            </div>
+
+            {% if form.errors %}
+                <div class="alert alert-danger">
                     {% for field in form %}
                         {% for error in field.errors %}
-                            <li>{{ error }}</li>
+                            <p>{{ error }}</p>
                         {% endfor %}
                     {% endfor %}
                     {% for error in form.non_field_errors %}
-                        <li>{{ error }}</li>
+                        <p>{{ error }}</p>
                     {% endfor %}
-                </ul>
+                </div>
+            {% endif %}
+
+            <div class="btn-container">
+                <button type="submit" class="btn-criar">Criar Evento</button>
             </div>
-        {% endif %}
-        
-        <!-- Nome do Evento -->
-        <div class="form-group">
-            <label for="{{ form.nome.id_for_label }}" class="label-nome-evento">Nome do Evento:</label>
-            {{ form.nome }}
-        </div>
-
-        <!-- Data e Hora -->
-        <div class="form-group">
-            <label for="{{ form.data_hora.id_for_label }}" class="label-data-hora-evento">Data e Hora:</label>
-            {{ form.data_hora }}
-        </div>
-
-        <!-- Endereço -->
-        <div class="form-group">
-            <label for="{{ form.endereco.id_for_label }}" class="label-endereco-evento">Endereço:</label>
-            {{ form.endereco }}
-        </div>
-
-        <!-- Descrição -->
-        <div class="form-group">
-            <label for="{{ form.descricao.id_for_label }}" class="label-descricao-evento">Descrição:</label>
-            {{ form.descricao }}
-        </div>
-
-        <!-- Limite de Convidados -->
-        <div class="form-group">
-            <label for="{{ form.limite_convidados.id_for_label }}" class="label-limite-convidados-evento">Limite de Convidados:</label>
-            {{ form.limite_convidados }}
-        </div>
-
-        <!-- Visibilidade -->
-        <div class="form-group">
-            <label for="{{ form.visibilidade.id_for_label }}" class="label-visibilidade-evento">Visibilidade:</label>
-            {{ form.visibilidade }}
-        </div>
-
-        <div class="btn-container">
-            <button type="submit">Criar Evento</button>
-        </div>
-    </form>
+        </form>
+    </div>
 </body>
 </html>
