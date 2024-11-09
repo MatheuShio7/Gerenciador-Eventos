@@ -27,7 +27,6 @@ class UsuarioForm(UserCreationForm):
     
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
-        # Removendo a mensagem de ajuda do campo password2 (confirmação de senha)
         self.fields['password2'].help_text = ''
 
 
@@ -40,6 +39,9 @@ class EditarPerfilForm(forms.ModelForm):
     class Meta:
         model = Usuario
         fields = ['username', 'email', 'data_nascimento', 'sexo']
+        help_texts = {
+            'username': None,
+        }
 
     def clean_data_nascimento(self):
         data_nascimento = self.cleaned_data.get('data_nascimento')

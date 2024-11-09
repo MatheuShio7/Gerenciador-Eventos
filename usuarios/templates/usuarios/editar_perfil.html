@@ -23,13 +23,13 @@
         <form method="POST">
             {% csrf_token %}
             {{ user_form.as_p }}
-            <button type="submit" name="salvar" class="btn-submit">Salvar Alterações</button>
+            <button type="submit" name="salvar" class="btn-salvar">Salvar Alterações</button>
         </form>
         <h2>Alterar Senha</h2>
         <form method="POST">
             {% csrf_token %}
             {{ senha_form.as_p }}
-            <button type="submit" name="alterar_senha" class="btn-submit">Alterar Senha</button>
+            <button type="submit" name="alterar_senha" class="btn-alterar">Alterar Senha</button>
         </form>
         {% if senha_form.non_field_errors %}
             <div class="error">
