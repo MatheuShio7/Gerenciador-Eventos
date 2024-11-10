@@ -54,3 +54,8 @@ class AlterarSenhaForm(PasswordChangeForm):
     class Meta:
         model = Usuario
         fields = ['old_password', 'new_password1', 'new_password2']
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        # Remover o texto de ajuda do campo 'new_password2'
+        self.fields['new_password2'].help_text = ''

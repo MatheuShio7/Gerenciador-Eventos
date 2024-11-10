@@ -21,28 +21,6 @@ img {
     border: 2px solid var(--roxo);
 }
 
-.container-principal form p {
-    font-size: 1.1em;
-}
-
-.container-principal p:last-of-type {
-    margin-bottom: 20px;
-}
-
-.container-principal form input, .container-principal form select {
-    font-size: 0.9em; 
-    padding: 2px; 
-    margin-bottom: 15px;
-}
-
-.container-principal form label {
-    font-weight: bolder;
-}
-
-.container-principal h2 {
-    margin-block: 30px;
-}
-
 .btn-voltar {
     display: inline-block;
     cursor: pointer;
@@ -63,4 +41,40 @@ img {
 .btn-voltar:hover {
     background-color: var(--roxo);
     color: white;
+}
+
+.container-principal form p {
+    font-size: 1.1em;
+}
+
+.container-principal form input, .container-principal form select {
+    font-size: 0.9em; 
+    padding: 2px; 
+    margin-bottom: 15px;
+}
+
+.container-principal form label {
+    font-weight: bolder;
+}
+
+.container-principal h2 {
+    margin-top: 30px;
+    margin-bottom: 15px;
+}
+
+.error li {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+    color: red;
+}
+
+.formulario-senha ul {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 15px;
+}
+
+.errorlist {
+    display: none;
 }

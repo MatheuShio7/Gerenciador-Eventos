@@ -15,9 +15,11 @@
     <img src="{% static 'images/event-manager.png' %}" alt="Logo Gerenciador de Eventos">
 
     <div class="container-principal">
+
         <a href="{% url 'perfil_usuario' %}" class="btn-voltar">
             <i class="bi bi-chevron-left"></i>
         </a>
+
         <h1>Editar Perfil</h1>
         <hr class="hr-eventos">
         <form method="POST">
@@ -25,17 +27,28 @@
             {{ user_form.as_p }}
             <button type="submit" name="salvar" class="btn-salvar">Salvar Alterações</button>
         </form>
+
         <h2>Alterar Senha</h2>
-        <form method="POST">
+        {% if senha_form.errors %}
+            <div>
+                <ul class="error">
+                    {% for field in senha_form %}
+                        {% for error in field.errors %}
+                            <li>{{ error }}</li>
+                        {% endfor %}
+                    {% endfor %}
+                    {% for error in senha_form.non_field_errors %}
+                        <li>{{ error }}</li>
+                    {% endfor %}
+                </ul>
+            </div>
+        {% endif %}
+        <form method="POST" class="formulario-senha">
             {% csrf_token %}
             {{ senha_form.as_p }}
             <button type="submit" name="alterar_senha" class="btn-alterar">Alterar Senha</button>
         </form>
-        {% if senha_form.non_field_errors %}
-            <div class="error">
-                {{ senha_form.non_field_errors }}
-            </div>
-        {% endif %}
+        
         <h2>Excluir Conta</h2>
         <form method="POST" action="{% url 'excluir_conta' %}">
             {% csrf_token %}
