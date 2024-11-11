@@ -1,7 +1,7 @@
 body {
     display: flex;
     flex-direction: column;
-    min-height: 100vh;
+    height: 100vh;
 }
 
 img {
@@ -15,8 +15,6 @@ img {
     align-self: center;
     width: 50%;
     padding: 90px 75px 60px 75px;
-    margin-top: auto;
-    margin-bottom: 50px;
     background-color: #fff;
     border-radius: 5px;
     box-shadow: 0 0 3px var(--roxo);
@@ -44,34 +42,36 @@ img {
     font-size: 1.1em;
 }
 
-.container-principal form input, .container-principal form select {
-    font-size: 0.9em; 
+.container-principal input, 
+.container-principal select,
+.container-principal textarea {
+    font-size: 1em; 
     padding: 2px; 
     margin-bottom: 15px;
 }
 
+.container-principal textarea {
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2em;
+    resize: none;
+}
+
+.descricao {
+    display: flex;
+    gap: 5px;
+    margin-right: -5px;
+}
+
 .container-principal form label {
     font-weight: bolder;
+    margin-right: 5px;
 }
 
-.container-principal h2 {
-    margin-top: 30px;
-    margin-bottom: 15px;
+.visibilidade {
+    margin-bottom: 10px;
 }
 
-.error li {
-    list-style-type: none;
-    padding-left: 0;
-    margin-bottom: 15px;
-    color: red;
-}
-
-.errorlist {
-    display: none;
-}
-
-.btn-salvar,
-.btn-alterar {
+.btn-salvar {
     display: inline-block;
     cursor: pointer;
     padding: 7.5px 15px;
@@ -87,30 +87,15 @@ img {
 }
 
 .btn-voltar:hover, 
-.btn-salvar:hover,
-.btn-alterar:hover {
+.btn-salvar:hover {
     background-color: var(--roxo);
     color: white;
     transform: scale(1.05);
 }
 
-.btn-delete {
-    display: inline-block;
-    cursor: pointer;
-    padding: 7.5px 15px;
-    margin-top: 5px;
-    font-size: 1em;
-    text-decoration: none;
-    border-radius: 15px;
-    font-weight: bolder;
+.error {
+    list-style-type: none;
+    padding-left: 0;
+    margin-bottom: 15px;
     color: red;
-    background-color: white;
-    border: 2px solid red;
-    transition: 0.3s;
-}
-
-.btn-delete:hover {
-    background-color: red;
-    color: white;
-    transform: scale(1.05);
 }

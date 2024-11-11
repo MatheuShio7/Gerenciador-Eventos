@@ -86,6 +86,7 @@ img {
 .btn-voltar:hover {
     background-color: var(--roxo);
     color: white;
+    transform: scale(1.05);
 }
 
 .alert {

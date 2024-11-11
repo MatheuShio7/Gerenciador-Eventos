@@ -38,7 +38,7 @@ class EditarPerfilForm(forms.ModelForm):
 
     class Meta:
         model = Usuario
-        fields = ['username', 'email', 'data_nascimento', 'sexo']
+        fields = ['username', 'first_name', 'last_name', 'email', 'data_nascimento', 'sexo']
         help_texts = {
             'username': None,
         }
@@ -58,4 +58,5 @@ class AlterarSenhaForm(PasswordChangeForm):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
         # Remover o texto de ajuda do campo 'new_password2'
+        self.fields['new_password1'].help_text = ''
         self.fields['new_password2'].help_text = ''

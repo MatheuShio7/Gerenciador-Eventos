@@ -20,11 +20,13 @@
         <h1>Meu Perfil</h1>
         <hr class="hr-eventos">
         <p><strong>Nome de usuário:</strong> {{ usuario.username }}</p>
+        <p><strong>Primeiro nome:</strong> {{ usuario.first_name }}</p>
+        <p><strong>Último nome:</strong> {{ usuario.last_name }}</p>
         <p><strong>Email:</strong> {{ usuario.email }}</p>
         <p><strong>Data de Nascimento:</strong> {{ usuario.data_nascimento }}</p>
         <p><strong>Sexo:</strong> {{ usuario.sexo }}</p>
 
-        <a href="{% url 'editar_perfil' %}" class="btn-editar">Editar Perfil</a>
+        <a href="{% url 'editar_perfil' %}" class="btn-editar">Editar Perfil</a> 
     </div>
 </body>
 </html>

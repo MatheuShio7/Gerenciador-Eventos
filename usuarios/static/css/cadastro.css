@@ -80,4 +80,5 @@ img {
 .btn-voltar:hover, .btn-cadastrar:hover {
     background-color: var(--roxo);
     color: white;
+    transform: scale(1.05);
 }

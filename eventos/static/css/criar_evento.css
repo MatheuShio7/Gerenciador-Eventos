@@ -1,4 +1,4 @@
-body {
+body { 
     display: flex;
     flex-direction: column;
     height: 100vh;
@@ -44,7 +44,8 @@ img {
 }
 
 .criar-evento-container textarea {
-    font-size: 1.5em;
+    font-family: 'Nunito', sans-serif;
+    font-size: 1.2em;
     resize: none;
 }
 
@@ -86,6 +87,7 @@ img {
 .btn-voltar:hover, .btn-criar:hover {
     background-color: var(--roxo);
     color: white;
+    transform: scale(1.05);
 }
 
 .alert {
