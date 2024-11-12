@@ -26,6 +26,7 @@ def detalhes_evento(request, evento_id):
 
 def editar_evento(request, evento_id):
     evento = get_object_or_404(Evento, id=evento_id)
+    nome_original = evento.nome
     
     if request.method == 'POST':
         form = EventoForm(request.POST, instance=evento)
@@ -35,7 +36,7 @@ def editar_evento(request, evento_id):
     else:
         form = EventoForm(instance=evento)
 
-    return render(request, 'eventos/editar_evento.html', {'form': form, 'evento': evento})
+    return render(request, 'eventos/editar_evento.html', {'form': form, 'evento': evento, 'nome_original': nome_original})
 
 
 @login_required
@@ -72,3 +73,13 @@ def deletar_evento(request, evento_id):
         return redirect('pagina_principal')
     else:
         return HttpResponseForbidden("Você não tem permissão para excluir este evento.")
+    
+
+def inscricao_evento(request, evento_id):
+    # Verifica se o usuário está autenticado
+    if request.user.is_authenticated:
+        return redirect('detalhes_evento', evento_id=evento_id)
+    else:
+        # Armazena o ID do evento na sessão e redireciona para o login
+        request.session['evento_para_redirecionar'] = evento_id
+        return redirect('home')  # Substitua 'login' pelo nome da URL da página de login

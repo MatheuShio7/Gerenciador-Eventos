@@ -31,7 +31,7 @@
         <p><strong>Participantes Inscritos:</strong> {{ evento.convidados.count }} / {{ evento.limite_convidados }}</p>
 
         {% if evento.criador == request.user %}
-            <p><strong>Visibilidade:</strong> {{ evento.visibilidade }}</p>
+            <p><strong class="visibilidade">Visibilidade:</strong> {{ evento.visibilidade }}</p>
         {% endif %}
 
         <div class="botoes">
@@ -39,9 +39,14 @@
                 <a href="{% url 'editar_evento' evento.id %}" class="btn-editar">
                     <i class="bi bi-pencil-square"></i>
                 </a>
+
+                <button class="btn-link" onclick="copyLink()">
+                    <i class="bi bi-box-arrow-up-right link-icon"></i>
+                </button>
+
                 <form method="post" action="{% url 'deletar_evento' evento.id %}">
                     {% csrf_token %}
-                    <button type="submit" class="btn-deletar">
+                    <button type="submit" class="btn-deletar" onclick="return confirm('Tem certeza que deseja excluir este evento? Esta ação não pode ser desfeita.')">
                         <i class="bi bi-trash3"></i>
                     </button>
                 </form>
@@ -50,11 +55,19 @@
                     {% csrf_token %}
                     <button type="submit" class="btn-desinscrever">Desinscrever-se</button>
                 </form>
+
+                <button class="btn-link" onclick="copyLink()">
+                    <i class="bi bi-box-arrow-up-right link-icon"></i>
+                </button>
             {% else %}
                 <form method="post" action="{% url 'inscrever_evento' evento.id %}">
                     {% csrf_token %}
                     <button type="submit" class="btn-inscrever">Inscrever-se</button>
                 </form>
+
+                <button class="btn-link" onclick="copyLink()">
+                    <i class="bi bi-box-arrow-up-right link-icon"></i>
+                </button>
             {% endif %}
         </div>
 
@@ -65,7 +78,38 @@
             </div>
         {% endfor %}
         {% endif %}
+
+        <p class="copy-message" style="display: none;">Link copiado!</p>
     </div>
+
+    <script>
+        function copyLink() {
+            const link = `${window.location.origin}{% url 'inscricao_evento' evento.id %}`;
+            
+            navigator.clipboard.writeText(link).then(() => {
+                const btnLink = document.querySelector(".btn-link");
+                const linkIcon = document.querySelector(".link-icon");
+                const copyMessage = document.querySelector(".copy-message");
+    
+                if (btnLink && linkIcon && copyMessage) {
+                    linkIcon.classList.remove("bi-box-arrow-up-right");
+                    linkIcon.classList.add("bi-check-lg");
+    
+                    copyMessage.style.display = "block";
+                    copyMessage.textContent = "Link copiado!";
+                    
+                    setTimeout(() => {
+                        copyMessage.style.display = "none";
+                        btnLink.style.color = ""; // Volta para a cor original
+                        linkIcon.classList.remove("bi-check-lg");
+                        linkIcon.classList.add("bi-box-arrow-up-right");
+                    }, 5000); // 5 segundos
+                } else {
+                    console.error("Um dos elementos não foi encontrado.");
+                }
+            }).catch(err => console.error("Erro ao copiar o link:", err));
+        }
+    </script>
  
 </body>
 </html>

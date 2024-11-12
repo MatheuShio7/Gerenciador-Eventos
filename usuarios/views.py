@@ -33,9 +33,17 @@ def login_view(request):
             usuario = authenticate(username=username, password=password)
             if usuario is not None:
                 login(request, usuario)
+
+                # Checa se há um evento para redirecionar na sessão
+                evento_id = request.session.pop('evento_para_redirecionar', None)
+                if evento_id:
+                    return redirect('detalhes_evento', evento_id=evento_id) # Redireciona para o evento
+
+                # Se não houver redirecionamento, leva à página principal
                 return redirect('pagina_principal')
     else:
         form = AuthenticationForm()
+        
     return render(request, 'usuarios/login.html', {'form': form})
 
 

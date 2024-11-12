@@ -11,7 +11,7 @@ class EventoForm(forms.ModelForm):
             'data_hora': forms.DateTimeInput(attrs={'class': 'form-data-hora', 'type': 'datetime-local'}),
             'endereco': forms.TextInput(attrs={'class': 'form-endereco'}),
             'descricao': forms.Textarea(attrs={'class': 'form-descricao'}),
-            'limite_convidados': forms.NumberInput(attrs={'class': 'form-limite-convidados'}),
+            'limite_convidados': forms.NumberInput(attrs={'class': 'form-limite-convidados', 'min': 1}),
             'visibilidade': forms.Select(attrs={'class': 'form-visibilidade'}),
         }
         labels = {
@@ -34,3 +34,9 @@ class EventoForm(forms.ModelForm):
         if data_hora and data_hora < timezone.now():
             raise forms.ValidationError("A data e hora não podem ser no passado.")
         return data_hora
+    
+    def clean_limite_convidados(self):
+        limite_convidados = self.cleaned_data.get('limite_convidados')
+        if limite_convidados < 1:
+            raise forms.ValidationError("O limite de convidados deve ser no mínimo 1.")
+        return limite_convidados

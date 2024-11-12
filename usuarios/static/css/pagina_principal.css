@@ -19,7 +19,7 @@ header {
 
 .btn-logout:hover {
     color: red;
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 header img {
@@ -39,7 +39,7 @@ header img {
 
 .btn-perfil:hover {
     color: var(--roxo-hover);
-    transform: scale(1.03);
+    transform: scale(1.05);
 }
 
 i {

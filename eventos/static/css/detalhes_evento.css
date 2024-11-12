@@ -26,16 +26,14 @@ img {
     font-size: 1.1em;
 }
 
-.event-details p:last-of-type {
-    margin-bottom: 30px;
-}
-
 .botoes {
     display: flex;
     gap: 30px;
+    margin-top: 25px;
 }
 
 .btn-editar,
+.btn-link,
 .btn-deletar,
 .btn-inscrever,
 .btn-desinscrever,
@@ -62,26 +60,33 @@ img {
 .btn-inscrever {
     color: green;
     border: 2px solid green;
+    padding: 11px 15px;
     font-size: 1.1em;
+    transition: 0.3s;
 }
 
 .btn-inscrever:hover {
     background-color: green;
     color: white;
+    transform: scale(1.05);
 }
 
 .btn-desinscrever {
     color: red;
     border: 2px solid red;
+    padding: 11px 15px;
     font-size: 1.1em;
+    transition: 0.3s;
 }
 
 .btn-desinscrever:hover {
     background-color: red;
     color: white;
+    transform: scale(1.05);
 }
 
 .btn-editar:hover,
+.btn-link:hover,
 .btn-deletar:hover,
 .btn-voltar:hover {
     background-color: var(--roxo);
@@ -93,4 +98,11 @@ img {
     margin-top: 20px;
     font-size: 1.2em;
     color: red;
+}
+
+.copy-message {
+    font-size: 1.1em;
+    color: var(--roxo);
+    margin-bottom: -25px;
+    margin-top: 20px;
 }
